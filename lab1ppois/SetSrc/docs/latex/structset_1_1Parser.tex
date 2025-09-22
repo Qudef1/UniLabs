@@ -1,0 +1,127 @@
+\doxysection{set\+::Parser Struct Reference}
+\hypertarget{structset_1_1Parser}{}\label{structset_1_1Parser}\index{set::Parser@{set::Parser}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classset}{set}} $>$ \mbox{\hyperlink{structset_1_1Parser_af7db1d726196b84d5a8453a6ea4dc531}{parse}} (std\+::string str)
+\begin{DoxyCompactList}\small\item\em Публичный метод для запуска парсера. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{structset_1_1Parser_ac87b5b027fe7b69308b822c829b9e3e5}{ignore\+\_\+w}} ()
+\begin{DoxyCompactList}\small\item\em пропускает пробелы \end{DoxyCompactList}\item 
+\mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}} \mbox{\hyperlink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em парсит один элемент \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structset_1_1Parser_a61f49643c62177ae2c17580e2edfa668}{parse\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em вспомогательный метод для \doxylink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\+\_\+element()} \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classset}{set}} $>$ \mbox{\hyperlink{structset_1_1Parser_a74f2580685976e7f6c9cb909f8e8d770}{parse\+\_\+set}} ()
+\begin{DoxyCompactList}\small\item\em вспомогательный метод для \doxylink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\+\_\+element()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structset_1_1Parser_ae2b9a5edb6e0c36f35239acc604da693}{input}}
+\begin{DoxyCompactList}\small\item\em Обрабатываемая строка \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structset_1_1Parser_aa4045319a2a71a7bfe4142e24a77bc5d}{pos}} =0
+\begin{DoxyCompactList}\small\item\em Текущая позиция \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structset_1_1Parser_ac87b5b027fe7b69308b822c829b9e3e5}\label{structset_1_1Parser_ac87b5b027fe7b69308b822c829b9e3e5} 
+\index{set::Parser@{set::Parser}!ignore\_w@{ignore\_w}}
+\index{ignore\_w@{ignore\_w}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{ignore\_w()}{ignore\_w()}}
+{\footnotesize\ttfamily void set\+::\+Parser\+::ignore\+\_\+w (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+пропускает пробелы 
+
+\Hypertarget{structset_1_1Parser_af7db1d726196b84d5a8453a6ea4dc531}\label{structset_1_1Parser_af7db1d726196b84d5a8453a6ea4dc531} 
+\index{set::Parser@{set::Parser}!parse@{parse}}
+\index{parse@{parse}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classset}{set}} $>$ set\+::\+Parser\+::parse (\begin{DoxyParamCaption}\item[{std\+::string}]{str }\end{DoxyParamCaption})}
+
+
+
+Публичный метод для запуска парсера. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & строка для парсинга. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+указатель на обработанное множество. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classset_a8e1b720081fcac757b48cdfb86b8c3cc}{set\+::set(std\+::string)} 
+\end{DoxySeeAlso}
+\Hypertarget{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}\label{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a} 
+\index{set::Parser@{set::Parser}!parse\_element@{parse\_element}}
+\index{parse\_element@{parse\_element}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_element()}{parse\_element()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}} set\+::\+Parser\+::parse\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+парсит один элемент 
+
+\begin{DoxyReturn}{Returns}
+возвращает распознанный элемент (либо int, либо shared\+\_\+ptr$<$set$>$) 
+\end{DoxyReturn}
+\Hypertarget{structset_1_1Parser_a61f49643c62177ae2c17580e2edfa668}\label{structset_1_1Parser_a61f49643c62177ae2c17580e2edfa668} 
+\index{set::Parser@{set::Parser}!parse\_int@{parse\_int}}
+\index{parse\_int@{parse\_int}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_int()}{parse\_int()}}
+{\footnotesize\ttfamily int set\+::\+Parser\+::parse\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+вспомогательный метод для \doxylink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\+\_\+element()} 
+
+\begin{DoxyReturn}{Returns}
+возвращает обработанное целое число 
+\end{DoxyReturn}
+\Hypertarget{structset_1_1Parser_a74f2580685976e7f6c9cb909f8e8d770}\label{structset_1_1Parser_a74f2580685976e7f6c9cb909f8e8d770} 
+\index{set::Parser@{set::Parser}!parse\_set@{parse\_set}}
+\index{parse\_set@{parse\_set}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_set()}{parse\_set()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classset}{set}} $>$ set\+::\+Parser\+::parse\+\_\+set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+вспомогательный метод для \doxylink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\+\_\+element()} 
+
+\begin{DoxyReturn}{Returns}
+возвращает указатель на обработанное множество. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structset_1_1Parser_ae2b9a5edb6e0c36f35239acc604da693}\label{structset_1_1Parser_ae2b9a5edb6e0c36f35239acc604da693} 
+\index{set::Parser@{set::Parser}!input@{input}}
+\index{input@{input}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily std\+::string set\+::\+Parser\+::input\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Обрабатываемая строка 
+
+\Hypertarget{structset_1_1Parser_aa4045319a2a71a7bfe4142e24a77bc5d}\label{structset_1_1Parser_aa4045319a2a71a7bfe4142e24a77bc5d} 
+\index{set::Parser@{set::Parser}!pos@{pos}}
+\index{pos@{pos}!set::Parser@{set::Parser}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily int set\+::\+Parser\+::pos =0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Текущая позиция 
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{set_8h}{set.\+h}}\item 
+\mbox{\hyperlink{set_8cpp}{set.\+cpp}}\end{DoxyCompactItemize}

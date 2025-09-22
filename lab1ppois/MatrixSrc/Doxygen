@@ -1,0 +1,6 @@
+PROJECT_NAME = "Matrix Library"
+PROJECT_BRIEF = "C++ Matrix implementation with linear algebra operations"
+OUTPUT_DIRECTORY = docs
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+EXTRACT_STATIC = YES

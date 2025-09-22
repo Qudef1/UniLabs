@@ -1,0 +1,9 @@
+<map id="matrix.h" name="matrix.h">
+<area shape="rect" id="Node000001" title="класс вещественной матрицы с возможностью пересечения объединения рахности и других операций" alt="" coords="120,5,197,31"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title=" " alt="" coords="5,79,88,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,40,66,81,64,76,127,36"/>
+<area shape="rect" id="Node000003" href="$matrix_8cpp.html" title=" " alt="" coords="113,79,205,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,44,161,79,156,79,156,44"/>
+<area shape="rect" id="Node000004" href="$test_8cpp.html" title=" " alt="" coords="229,79,304,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="189,36,250,76,248,81,186,40"/>
+</map>

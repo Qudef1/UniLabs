@@ -1,0 +1,6 @@
+PROJECT_NAME = "Set Library"
+PROJECT_BRIEF = "C++ Set library with set operations"
+OUTPUT_DIRECTORY = docs
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+EXTRACT_STATIC = YES

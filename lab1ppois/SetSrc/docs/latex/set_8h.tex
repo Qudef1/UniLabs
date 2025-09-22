@@ -1,0 +1,59 @@
+\doxysection{set.\+h File Reference}
+\hypertarget{set_8h}{}\label{set_8h}\index{set.h@{set.h}}
+
+
+Множество, поддерживающее вложенность  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$variant$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$initializer\+\_\+list$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+Include dependency graph for set.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{set_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{set_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classset}{set}}
+\begin{DoxyCompactList}\small\item\em Реализует поставленную задачу(вложенное множество). Хранит в себе необходимые поля и методы. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structset_1_1Parser}{set\+::\+Parser}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}} = std\+::variant$<$ int, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classset}{set}} $>$ $>$
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Множество, поддерживающее вложенность 
+
+\begin{DoxyAuthor}{Author}
+qudef 
+\end{DoxyAuthor}
+Класс {\ttfamily set} представляет из себя множество, способное содержать вложенные множества и целые числа вложенность реализуется с помощью библиотеки {\ttfamily std\+::variant}. Вложенные множества хрянятся в качестве {\ttfamily std\+::shared\+\_\+ptr\texorpdfstring{$<$}{<}set\texorpdfstring{$>$}{>}}. Поддерживает операции пересечения, объединения, разности и булеана. Множество может быть задано задано через строку, массив типа char или через std\+::initializer\+\_\+list. 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}\label{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea} 
+\index{set.h@{set.h}!Element@{Element}}
+\index{Element@{Element}!set.h@{set.h}}
+\doxysubsubsection{\texorpdfstring{Element}{Element}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}} =  std\+::variant$<$int, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classset}{set}}$>$ $>$}
+

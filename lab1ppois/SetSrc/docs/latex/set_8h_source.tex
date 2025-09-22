@@ -1,0 +1,69 @@
+\doxysection{set.\+h}
+\hypertarget{set_8h_source}{}\label{set_8h_source}\mbox{\hyperlink{set_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <variant>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classset}{set}};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{using\ }\mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}}\ =\ std::variant<int,\ std::shared\_ptr<set>>;}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ документация\ doxygen}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classset}{set}}\{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ std::vector<Element>\ \mbox{\hyperlink{classset_aae4afe8e7ddf0c70a89132186469ef31}{elements}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classset_a3341115f469d3c1397f4c716fb9e0390}{size}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_ac55ed624438ac008b367de5ed8b1f805}{contains\_int}}(\textcolor{keywordtype}{int})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a6c9d36ba5acba72848f5b16ee5f9b463}{contains\_set}}(std::shared\_ptr<set>)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structset_1_1Parser}{Parser}}\{}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structset_1_1Parser_ae2b9a5edb6e0c36f35239acc604da693}{input}};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structset_1_1Parser_aa4045319a2a71a7bfe4142e24a77bc5d}{pos}}=0;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structset_1_1Parser_ac87b5b027fe7b69308b822c829b9e3e5}{ignore\_w}}();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}}\ \mbox{\hyperlink{structset_1_1Parser_a58e90a9d7753a25772d037cfe27e9b8a}{parse\_element}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structset_1_1Parser_a61f49643c62177ae2c17580e2edfa668}{parse\_int}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::shared\_ptr<set>\ \mbox{\hyperlink{structset_1_1Parser_a74f2580685976e7f6c9cb909f8e8d770}{parse\_set}}();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ std::shared\_ptr<set>\ \mbox{\hyperlink{structset_1_1Parser_af7db1d726196b84d5a8453a6ea4dc531}{parse}}(std::string\ str);}
+\DoxyCodeLine{00081\ \ \ \ \ \};}
+\DoxyCodeLine{00082\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classset_a9a9e7ac66eda015ed84f790dda70c0a4}{set}}();}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classset_a9a9e7ac66eda015ed84f790dda70c0a4}{set}}(std::initializer\_list<int>);}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{classset_a9a9e7ac66eda015ed84f790dda70c0a4}{set}}(std::initializer\_list<Element>);\ }
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classset_a9a9e7ac66eda015ed84f790dda70c0a4}{set}}(std::string);}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{classset_a9a9e7ac66eda015ed84f790dda70c0a4}{set}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*);}
+\DoxyCodeLine{00107\ \ \ \ \ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classset_a515e8e0e57c2620a2e1ab49c4df13ef9}{add}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classset_a515e8e0e57c2620a2e1ab49c4df13ef9}{add}}(std::shared\_ptr<set>);}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a91fdbb1e65b2f9f2e77d38f57ce6fb44}{is\_null}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a10741aa38b1b7764d1b8a8f4939fd7b6}{contains}}(std::shared\_ptr<set>)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a10741aa38b1b7764d1b8a8f4939fd7b6}{contains}}(\textcolor{keywordtype}{int})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classset_afbd9df22c9e609bdd840819432e9dbf6}{get\_size}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a1dd23eaf28554974259c8e26507cee57}{remove}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}}\&);}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\ \mbox{\hyperlink{classset_af5d9e1779adf72e60c21ac2bd1c1ecef}{boolean}}();}
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\&\ \mbox{\hyperlink{classset_ab182035e5d84ca7dcd108a25caa294c0}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&);}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\ \mbox{\hyperlink{classset_af09aaa02522fda9ee6647b373b8b2958}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00172\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\&\ \mbox{\hyperlink{classset_a776a1833778381d113fdc04290d01327}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&);}
+\DoxyCodeLine{00178\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\ \mbox{\hyperlink{classset_abe76030a149c8aabb215c3c6af4a56d6}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\&\ \mbox{\hyperlink{classset_a5b06f5478c18aba892c9020a68506ea8}{operator*=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&);}
+\DoxyCodeLine{00190\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\ \mbox{\hyperlink{classset_a6a0a52b7fe0d135c3b454d834d87842b}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{classset}{set}}\&\ \mbox{\hyperlink{classset_ac062e9fb5e3b2a17979f2890b722b534}{operator-\/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&);}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a087aa30e775c6fb4bcea6581707b5c76}{operator[]}}(\mbox{\hyperlink{set_8h_a5f4589f356d38ef0efff9c6a9abbf3ea}{Element}});}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a8e9a6c764ddce15adda3a83d4e9a319a}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&)\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classset_a8d100de631065a28891a1f74cd3583dd}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classset}{set}}\&)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keyword}{friend}\ std::istream\&\ \mbox{\hyperlink{classset_a063b2b77d2d694fbb4c66f0fb9501afa}{operator>>}}(std::istream\&,\mbox{\hyperlink{classset}{set}}\&);}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classset_af43c3784c517c47af2c568bd20f46e45}{operator<<}}(std::ostream\&,\mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<set>\ \mbox{\hyperlink{classset_af7c2ee6fee03779117145383ef5db914}{make\_nested\_set}}(std::initializer\_list<Element>\ init\ =\ \{\});\ }
+\DoxyCodeLine{00238\ \};}
+\DoxyCodeLine{00239\ \textcolor{comment}{//g++\ -\/std=c++17\ -\/fprofile-\/arcs\ -\/ftest-\/coverage\ set.cpp\ test.cpp\ -\/I/usr/include\ -\/lUnitTest++\ -\/o\ tests\ \&\&\ ./tests\ \&\&\ gcov\ tests-\/set.gcov}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ }
+
+\end{DoxyCode}
