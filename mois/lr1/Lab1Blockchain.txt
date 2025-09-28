@@ -1,0 +1,32 @@
+concept_blockchain
+=> nrel_main_idtf:
+   [блокчейн]
+   (*
+	<- lang_ru;;
+   *);
+=> nrel_main_idtf:
+   [blockchain]
+   (*
+	<- lang_eng;;
+   *);
+<- rrel_explored_concept:
+   subject_domain_of_blockchain_technologies;
+<= nrel_inclusion:
+   concept_distributed_financial_system;
+=> nrel_inclusion:
+   concept_bitcoin_technology;
+=> nrel_inclusion:
+   concept_ethereum_technology;
+<= nrel_definition:
+   [Блокчейн — это распределённая, неизменяемая база данных (реестр), состоящая из    связанных блоков, защищённых криптографическими хешами.]
+   (*
+	<- lang_ru;;
+   *);;
+
+
+
+
+
+
+
+
