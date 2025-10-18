@@ -17,6 +17,9 @@ class VisaInvalidDate(Exception):
         super().__init__("Expiration date Error")
 
 class Visa:
+    pass
+
+class Visa:
     def __init__(self,visa_number:str,country:str,issue_date:date,expiration_date:date,
                  entry_count:int=1):
         if expiration_date <= issue_date:
@@ -48,6 +51,13 @@ class Visa:
     def deactivate(self):
         self.is_active = False
 
+    def __getattribute__(self, name):
+        try:
+            return object.__getattribute__(self, name)
+        except AttributeError:
+            raise f"attribute {name} not found"
+
+        
 
     def use_entry(self) -> None:
         """Использовать один въезд по визе"""
@@ -66,5 +76,8 @@ class Visa:
 
     def get_expiration_date(self) -> date:
         return self.expiration_date
-        
+    
+    
+
+
         
