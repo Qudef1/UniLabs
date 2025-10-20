@@ -3,23 +3,30 @@ import bankAccount
 from datetime import date
 
 class Person:
-    def __init__(self,passport: passport.Passport,bank_account:bankAccount.BankAccount):
+    def __init__(self,passport: passport.Passport,bank_account:bankAccount.BankAccount,mood:int = 10):
         self.bank_account = bank_account
         self.passport = passport
+        self.__mood = mood
     def __getattr__(self,name):
         try:
             return object.__getattribute__(self,name)
         except AttributeError:
             print("attribute not found")
+
+    def __check_mood(self):
+        if self.__mood <=5:
+            print("you are now sad, go make some activities")
+        elif 10<=self.__mood<=20:
+            print("you feel yourself fine")
+        else:
+            print("you feel very well") 
+    def change_mood(self,mood_value):
+        self.__mood -= mood_value
+        self.__check_mood()
+        
     
 
-if __name__ == "__main__":
-    passport_temp = passport.Passport("1232","BOBa","huu",date(2025,12,21))
-    visa = passport.v.Visa("111","Poland",date(2025,11,10),date(2025,12,21))
-    passport_temp.set_visa(visa)
-    bank_account = bankAccount.BankAccount(10000.0,"BOBaHuu1232")
-    person = Person(passport_temp,bank_account)
-    print(person.passport.visa.expiration_date)
+
     
         
     

@@ -10,7 +10,7 @@ class BankAccount:
             self.transaction = Transaction(self,other,price)
             print(f"transaction {self.transaction.transaction_number} has successfully processed")
         except NotEnoughMoney:
-            pass
+            raise NotEnoughMoney()
 
     def withdraw(self,price):
         if self.sum - price>0:
@@ -18,6 +18,9 @@ class BankAccount:
             
     def transfer(self,price):
         self.sum += price
+    
+    def get_sum(self):
+        return self.sum
         
         
 
@@ -32,7 +35,7 @@ class Transaction:
         self.price = price
         self.sender = bank_sender
         self.receiver = bank_receiver
-        self.transaction_number = (bank_sender.id+"_"+bank_receiver.id+"_"+datetime.now().strftime())
+        self.transaction_number = (bank_sender.id+"_"+bank_receiver.id+"_"+datetime.now().strftime("%Y%m%d%H%M%S"))
         self.process_transaction()
         
 
@@ -44,6 +47,8 @@ class Transaction:
         self.receiver.transfer(self.price)
 
     def get_transaction_number(self):
+        return self.transaction_number
+    def __str__(self):
         return self.transaction_number
 
             

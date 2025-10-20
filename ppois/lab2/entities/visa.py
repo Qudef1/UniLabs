@@ -35,12 +35,11 @@ class Visa:
         self.is_active = True
 
     def is_expired(self) -> bool:
-        return date.today()<self.expiration_date
+        return date.today()>self.expiration_date
 
     def is_valid(self) -> bool:
-        return self.is_expired and self.is_active
+        return not self.is_expired() and self.is_active and self.used_entries < self.entry_count
     def days_until_expiration(self) -> int:
-
         if self.is_expired():
             return 0
         return int((self.expiration_date - date.today()).days)
