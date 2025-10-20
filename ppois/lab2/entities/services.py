@@ -1,7 +1,7 @@
-from person import Person
-from bankAccount import BankAccount, Transaction, NotEnoughMoney
-from geography import City
-from tour import Tour
+from .person import Person
+from .bankAccount import BankAccount, Transaction, NotEnoughMoney
+from .geography import City
+
 
 
 class Service:
@@ -36,8 +36,6 @@ class VisaSupportService(Service):
         print(f"Visa support provided for {client.passport.name} to {country}")
     
     
-
-
 class LuggageService(Service):
     def __init__(self, weight_kg: int, price: float):
         super().__init__("Luggage Service", price)
@@ -47,11 +45,3 @@ class LuggageService(Service):
         print(f"Luggage ({self.weight_kg} kg) sent from {from_city} to {to_city}")
 
 
-class GuideService(Service):
-    def __init__(self, guide_name: str, language: str, price: float):
-        super().__init__("Guide Service", price)
-        self.guide_name = guide_name
-        self.language = language
-
-    def assign_to_tour(self, tour: Tour):
-        print(f"Guide {self.guide_name} ({self.language}) assigned to tour in {tour.destination}")

@@ -1,13 +1,11 @@
-# tour.py
 from datetime import date
-from typing import List, Optional
-from geography import City
-from person import Person as Client
-from visa import Visa
-from accomodation import Accomodation
-from transport import Transport
-from bankAccount import BankAccount
-from services import Service
+from typing import List
+from .geography import City
+from .person import Person as Client
+from .visa import Visa
+from .accomodation import Accomodation
+from .transport import Transport
+from .services import Service
 
 
 class TourAndVisaIncompatible(Exception):
@@ -64,6 +62,7 @@ class Tour:
     def add_accommodation(self, accommodation: Accomodation):
         self.accommodations.append(accommodation)
         self.price = self._calculate_total_price() 
+    
 
     def add_transport(self, transport: Transport):
         self.transports.append(transport)
@@ -114,7 +113,7 @@ class Tour:
     def __str__(self):
         return (
             f"Tour to {self.destination}, "
-            f"{self.start_date} – {self.end_date}, "
+            f"{self.start_date} - {self.end_date}, "
             f"Total Price: {self.price:.2f}, "
             f"Duration: {self.get_total_duration()} days"
         )

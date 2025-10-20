@@ -1,11 +1,17 @@
 from datetime import datetime
 from typing import List, Optional
-from person import Person as Client
-from booking import Booking
-from tour import Tour
-from geography import City
-from tourist_agency import TouristAgency
+from .person import Person as Client
+from .booking import Booking
+from .tour import Tour
+from .geography import City
+from random import random
 
+
+GUIDE_SUCCESS_RATE=0.3
+
+class EmployeeIsUnavailable(Exception):
+    def __init__(self):
+        super().__init__("Employee is unavailable for this moment")
 
 class Employee:
     def __init__(self, employee_id: str, name: str, position: str, hire_date: datetime):
@@ -24,6 +30,8 @@ class TravelAgent(Employee):
         super().__init__(employee_id, name, "Travel Agent", hire_date)
         self.commission_rate = commission_rate
         self.bookings_handled = 0
+        self.salary = Salary(2000,3000)
+        self.work_schedule = WorkSchedule(self, "9.00", "18.00",["Mnd","Tue","Wed","Thu","Fri"])
 
     def book_tour_for_client(self, client: Client, tour: Tour) -> Optional[Booking]:
         """Помогает клиенту забронировать тур"""
@@ -41,44 +49,26 @@ class TravelAgent(Employee):
 
     def __str__(self):
         return f"TravelAgent: {self.name}, Bookings handled: {self.bookings_handled}"
+    def get_bonus(self):
+        self.salary.bonus*=1.12
 
 
 class Manager(Employee):
     def __init__(self, employee_id: str, name: str, hire_date: datetime, department: str):
         super().__init__(employee_id, name, "Manager", hire_date)
         self.department = department
-        self.subordinates: List[Employee] = []
+        self.salary = Salary(3000,5000)
+        self.work_schedule = WorkSchedule(self, "9.00", "18.00",["Mnd","Tue","Wed","Thu","Fri"])
+        
+    def __increase_bonus(self):
+        self.salary.bonus*=1.1
 
-    def add_subordinate(self, emp: Employee):
-        self.subordinates.append(emp)
-
-    def view_team_status(self):
-        print(f"Manager {self.name} manages {len(self.subordinates)} employees:")
-        for emp in self.subordinates:
-            print(f"- {emp}")
-
-    def offer_tours_to_client(self, client: Client, agency: TouristAgency):
+    def offer_tours_to_client(self, client: Client, tours: List[Tour]):
         """
         Предлагает туры пользователю из агентства
         """
-        agency.list_available_tours()
-        try:
-            choice = int(input(f"{client.passport.name}, choose a tour (1-{len(agency.available_tours)}): ")) - 1
-            selected_tour = agency.get_tour_by_index(choice)
-            print(f"\nYou selected: {selected_tour}")
-            print(f"Total price: {selected_tour.price:.2f}")
-            confirm = input("Confirm booking? (y/n): ")
-            if confirm.lower() == 'y':
-                success = selected_tour.book(client)
-                if success:
-                    print("Booking successful!")
-                else:
-                    print("Booking failed.")
-            else:
-                print("Booking cancelled.")
-        except (ValueError, IndexError):
-            print("Invalid choice.")
-
+        self.__increase_bonus()
+        return print(*tours)
     def __str__(self):
         return f"Manager: {self.name}, Department: {self.department}"
 
@@ -87,20 +77,29 @@ class Guide(Employee):
     def __init__(self, employee_id: str, name: str, hire_date: datetime, languages: List[str], city: City):
         super().__init__(employee_id, name, "Guide", hire_date)
         self.languages = languages
-        self.city = city  # город, где работает гид
+        self.city = city  
         self.is_available = True
+        self.salary = Salary(1000,2000)
 
-    def assign_to_tour(self, tour: Tour) -> bool:
+    def __assign_to_tour(self, tour: Tour) -> bool:
         """Проверяет, может ли гид вести тур в этом городе"""
         if not self.is_available or tour.destination != self.city:
-            print(f"Guide {self.name} is not available or not assigned to {tour.destination}")
             return False
         self.is_available = False
-        print(f"Guide {self.name} assigned to tour in {tour.destination}")
         return True
-
+    
+    def go_to_tour(self,tour: Tour):
+        if self.__assign_to_tour(tour):
+            if random() > GUIDE_SUCCESS_RATE:
+                self.__increase_bonus()
+            return None
+        raise EmployeeIsUnavailable()
+        
     def __str__(self):
         return f"Guide: {self.name}, Languages: {', '.join(self.languages)}, City: {self.city}"
+    
+    def __increase_bonus(self):
+        self.salary.bonus*=1.2
 
 
 class Salary:

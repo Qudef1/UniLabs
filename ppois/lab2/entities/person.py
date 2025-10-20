@@ -1,9 +1,9 @@
-import passport
-import bankAccount
-from datetime import date
+from .passport import Passport
+from .bankAccount import BankAccount
+
 
 class Person:
-    def __init__(self,passport: passport.Passport,bank_account:bankAccount.BankAccount,mood:int = 10):
+    def __init__(self,passport: Passport,bank_account:BankAccount,mood:int = 10):
         self.bank_account = bank_account
         self.passport = passport
         self.__mood = mood

@@ -1,7 +1,7 @@
 import datetime as dt
 from typing import Optional
-from geography import City
-from bankAccount import BankAccount, Transaction, NotEnoughMoney
+from .geography import City
+from .bankAccount import BankAccount, Transaction, NotEnoughMoney
 
 class AccomodationNotFoundOrExpired(Exception):
     def __init__(self):

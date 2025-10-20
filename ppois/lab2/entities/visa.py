@@ -6,18 +6,15 @@ class VisaExpiredDate(Exception):
 
 class VisaNoEnabledEntries(Exception):
     def __init__(self):
-        super().__init__(f"You have already used all your entries on this visa.")
+        super().__init__(f"You have already used all your entries on this visa")
 
 class VisaNotAvailable(Exception):
     def __init__(self):
-        super().__init__("Your visa is not available.")
+        super().__init__("Your visa is not available")
 
 class VisaInvalidDate(Exception):
     def __init__(self):
         super().__init__("Expiration date Error")
-
-class Visa:
-    pass
 
 class Visa:
     def __init__(self,visa_number:str,country:str,issue_date:date,expiration_date:date,

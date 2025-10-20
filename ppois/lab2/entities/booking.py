@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import List, Optional
-from person import Person
-from transport import Transport, Flight, CarRental
-from accomodation import Accomodation
-from tour import Tour
-from bankAccount import Transaction,NotEnoughMoney
+from .person import Person
+from .transport import Flight, CarRental
+from .accomodation import Accomodation
+from .tour import Tour
+from .bankAccount import Transaction,NotEnoughMoney
 
 
 class Booking:
