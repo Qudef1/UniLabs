@@ -1,5 +1,5 @@
-from .passport import Passport
-from .bankAccount import BankAccount
+from docs.passport import Passport
+from services.bankAccount import BankAccount
 
 
 class Person:

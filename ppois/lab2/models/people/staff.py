@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import List, Optional
 from .person import Person as Client
-from .booking import Booking
-from .tour import Tour
-from .geography import City
+from travel.booking import Booking
+from travel.tour import Tour
+from travel.geography import City
 from random import random
 
 

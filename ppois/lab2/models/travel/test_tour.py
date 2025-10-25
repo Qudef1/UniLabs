@@ -2,15 +2,15 @@ import unittest
 import sys
 import os
 from datetime import date, datetime
-from entities.geography import Country, City
-from ppois.lab2.models.docs.passport import Passport
-from ppois.lab2.models.docs.visa import Visa
-from ppois.lab2.services.bankAccount import BankAccount
-from ppois.lab2.models.people.person import Person
-from entities.accomodation import Hotel
-from entities.transport import Flight
-from ppois.lab2.services.services import Insurance
-from entities.tour import Tour, TourAndVisaIncompatible, EndAndStartDateError
+from .geography import Country, City
+from docs.passport import Passport
+from docs.visa import Visa
+from services.bankAccount import BankAccount
+from people.person import Person
+from .accomodation import Hotel
+from .transport import Flight
+from services.services import Insurance
+from .tour import Tour, TourAndVisaIncompatible, EndAndStartDateError
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 

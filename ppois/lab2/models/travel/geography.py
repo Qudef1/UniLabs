@@ -1,5 +1,5 @@
 from datetime import date 
-from .visa import Visa
+from docs.visa import Visa
 
 class Country:
     def __init__(self,name:str,code:str,visa_required:bool=True):

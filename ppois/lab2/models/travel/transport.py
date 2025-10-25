@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from .geography import City
-from .person import Person
-from .bankAccount import BankAccount,Transaction,NotEnoughMoney
+from people.person import Person
+from services.bankAccount import BankAccount,Transaction,NotEnoughMoney
 from random import randint
 
 class Transport:

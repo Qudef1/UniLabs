@@ -1,11 +1,11 @@
 from datetime import date
 from typing import List
 from .geography import City
-from .person import Person as Client
-from .visa import Visa
+from people.person import Person as Client
+from docs.visa import Visa
 from .accomodation import Accomodation
 from .transport import Transport
-from .services import Service
+from services.services import Service
 
 
 class TourAndVisaIncompatible(Exception):

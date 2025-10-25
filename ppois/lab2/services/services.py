@@ -1,6 +1,6 @@
-from .person import Person
+from models.people.person import Person
 from .bankAccount import BankAccount, Transaction, NotEnoughMoney
-from .geography import City
+from models.travel.geography import City
 
 
 
