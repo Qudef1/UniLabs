@@ -22,10 +22,6 @@ class BankAccount:
     def get_sum(self):
         return self.sum
         
-        
-
-
-
 class NotEnoughMoney(Exception):
     def __init__(self):
         super().__init__("Not enough money. Transaction Failed")

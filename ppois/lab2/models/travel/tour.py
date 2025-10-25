@@ -6,6 +6,8 @@ from docs.visa import Visa
 from .accomodation import Accomodation
 from .transport import Transport
 from services.services import Service
+from .booking import Booking
+from services.bankAccount import Transaction,BankAccount
 
 
 class TourAndVisaIncompatible(Exception):
@@ -39,10 +41,11 @@ class Tour:
         self.services = services or []
         self.commission_rate = commission_rate
         self.sights = []
+        
 
-        self.price = self._calculate_total_price()
+        self.price = self.__calculate_total_price()
 
-    def _calculate_total_price(self) -> float:
+    def __calculate_total_price(self) -> float:
         total = self.base_cost
 
         for trans in self.transports:
@@ -61,16 +64,15 @@ class Tour:
 
     def add_accommodation(self, accommodation: Accomodation):
         self.accommodations.append(accommodation)
-        self.price = self._calculate_total_price() 
+        self.price = self.__calculate_total_price() 
     
-
     def add_transport(self, transport: Transport):
         self.transports.append(transport)
-        self.price = self._calculate_total_price()
+        self.price = self.__calculate_total_price()
 
     def add_service(self, service: Service):
         self.services.append(service)
-        self.price = self._calculate_total_price()
+        self.price = self.__calculate_total_price()
 
     def add_sight(self, sight):
         if sight.city == self.destination:
@@ -92,7 +94,7 @@ class Tour:
 
         print("Your visa is compatible with this tour")
 
-    def book(self, client: Client) -> bool:
+    def book(self, client: Client,travel_agency_bank_account:BankAccount) -> bool:
         try:
             self.check_visa(client)
         except TourAndVisaIncompatible as e:
@@ -103,7 +105,7 @@ class Tour:
             print("Not enough money to book the tour.")
             return False
 
-        client.bank_account.withdraw(self.price)
+        Transaction(client.bank_account,travel_agency_bank_account,self.price)
         print(f"Tour to {self.destination} booked successfully for {self.price:.2f}!")
         return True
 

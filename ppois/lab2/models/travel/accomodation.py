@@ -6,9 +6,11 @@ from services.bankAccount import BankAccount, Transaction, NotEnoughMoney
 class AccomodationNotFoundOrExpired(Exception):
     def __init__(self):
         super().__init__("Accomodation not found or expired")
+
 class StartAndEndDateError(Exception):
     def __init__(self):
         super().__init__("start date must be before end date")
+
 class Accomodation:
     def __init__(self,start_date=dt.date.today(),end_date=dt.date.today(),location:Optional[City]=0, 
                  price_per_night: float=0.0,bank_account:Optional[BankAccount]=None):
@@ -22,11 +24,13 @@ class Accomodation:
             raise StartAndEndDateError()
         if self.end_date == dt.date.today():
             raise AccomodationNotFoundOrExpired()  
+        
     def __getattr__(self, name):
         try:
             return object.__getattribute__(self,name)
         except AttributeError:
             print("attribute not found")
+            
     def book(self,client_bank_account: BankAccount):
         total_price = self.price
         try:

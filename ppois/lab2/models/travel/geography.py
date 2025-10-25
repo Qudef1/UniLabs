@@ -40,6 +40,6 @@ class Sight:
         self.country = country
         self.city = city
 
-    def visit(self):
-        print("sight info")
+    def visit(self,sight_info:str = "This sight is unknown for now"):
+        print(sight_info)
             

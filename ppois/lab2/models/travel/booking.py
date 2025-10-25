@@ -48,22 +48,7 @@ class AccomodationBooking(Booking):
         super().__init__(person)
         self.accommodation = accommodation
         if self.is_confirmed:
-            try:
-                Transaction(person.bank_account,accommodation.bank_account,accommodation.price)
-            except NotEnoughMoney:
-                print("not enough money to rent this accomodation")
+            self.accommodation.book(person)
 
     def __str__(self):
         return f"Hotel Booking: {self.booking_id} | {self.accommodation}"
-
-
-class TourBooking(Booking):
-    def __init__(self, person: Person, tour: Tour):
-        super().__init__(person)
-        self.tour = tour
-        self.is_confirmed = self.tour.check_visa(person) and person.bank_account.sum >= tour.cost
-        if self.is_confirmed:
-            person.bank_account.withdraw(tour.cost)
-
-    def __str__(self):
-        return f"Tour Booking: {self.booking_id} | Tour to {self.tour.destination}"

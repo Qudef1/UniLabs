@@ -5,6 +5,7 @@ from travel.booking import Booking
 from travel.tour import Tour
 from travel.geography import City
 from random import random
+from services.bankAccount import BankAccount
 
 
 GUIDE_SUCCESS_RATE=0.3
@@ -24,7 +25,9 @@ class Employee:
     def __str__(self):
         return f"Employee: {self.name}, Position: {self.position}, ID: {self.employee_id}"
 
-
+class BookingTourFailed(Exception):
+    def __init__(self):
+        super().__init__("Tour booking was failed")
 class TravelAgent(Employee):
     def __init__(self, employee_id: str, name: str, hire_date: datetime, commission_rate: float = 0.05):
         super().__init__(employee_id, name, "Travel Agent", hire_date)
@@ -33,17 +36,14 @@ class TravelAgent(Employee):
         self.salary = Salary(2000,3000)
         self.work_schedule = WorkSchedule(self, "9.00", "18.00",["Mnd","Tue","Wed","Thu","Fri"])
 
-    def book_tour_for_client(self, client: Client, tour: Tour) -> Optional[Booking]:
+    def book_tour_for_client(self, client: Client, tour: Tour,travel_agency_bank_account:BankAccount) -> Optional[Booking]:
         """Помогает клиенту забронировать тур"""
-        if not tour.check_visa(client):
-            print(f"{client.passport.name} does not have valid visa for {tour.destination.country.name}")
-            return None
-        if client.bank_account.sum < tour.price:  
-            print(f"{client.passport.name} does not have enough money for tour.")
-            return None
-
-        client.bank_account.withdraw(tour.price)
+        try:
+            tour.book(client,travel_agency_bank_account)
+        except:
+            raise BookingTourFailed()
         self.bookings_handled += 1
+        self.get_bonus()
         print(f"Tour booked by agent {self.name} for {client.passport.name}. Commission: {tour.price * self.commission_rate:.2f}")
         return Booking(client)
 
@@ -54,9 +54,8 @@ class TravelAgent(Employee):
 
 
 class Manager(Employee):
-    def __init__(self, employee_id: str, name: str, hire_date: datetime, department: str):
+    def __init__(self, employee_id: str, name: str, hire_date: datetime):
         super().__init__(employee_id, name, "Manager", hire_date)
-        self.department = department
         self.salary = Salary(3000,5000)
         self.work_schedule = WorkSchedule(self, "9.00", "18.00",["Mnd","Tue","Wed","Thu","Fri"])
         
@@ -64,9 +63,6 @@ class Manager(Employee):
         self.salary.bonus*=1.1
 
     def offer_tours_to_client(self, client: Client, tours: List[Tour]):
-        """
-        Предлагает туры пользователю из агентства
-        """
         self.__increase_bonus()
         return print(*tours)
     def __str__(self):
