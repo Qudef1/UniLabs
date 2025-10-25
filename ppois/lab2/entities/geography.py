@@ -23,10 +23,6 @@ class Country:
     def __str__(self):
         return f"{self.name}, {self.__code}, visa required = {self.visa_required}"
     
-    
-    
-        
-    
 class City:
     def __init__(self,name:str,country:Country):
         self.name = name
@@ -46,8 +42,4 @@ class Sight:
 
     def visit(self):
         print("sight info")
-        
-        
-        
-
-        
+            

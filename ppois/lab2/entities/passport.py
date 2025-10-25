@@ -4,6 +4,7 @@ from typing import Optional
 class PassportIsExpired(Exception):
     def __init__(self):
         super().__init__("Passport is expired")
+        
 class Passport:
     def __init__(self,passport_num:str,name:str,surname:str,passport_expiration_date:date,visa: Optional[Visa] = None):
         

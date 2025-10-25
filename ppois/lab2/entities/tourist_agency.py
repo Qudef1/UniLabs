@@ -1,7 +1,7 @@
 from .tour import Tour
 from .person import Person
 from .staff import Guide, Manager, TravelAgent
-from typing import List
+from typing import List,Optional
 import random
 
 
@@ -26,21 +26,47 @@ class TouristAgency:
             return self.available_tours[index]
         else:
             raise IndexError("Tour index out of range")
-        
+    
+    def get_avaiable_tours(self):
+        return self.__available_tours
     def interact_with_person(self,person:Person):
-        travel_agent = random.choice(self.travel_agents)
-        manager = random.choice(self.managers)
-        manager.offer_tours_to_client(self.__available_tours)
-        picked_tour = random.choice(self.__available_tours)
-        travel_agent.book_tour_for_client(person,picked_tour)
-        if len(picked_tour.sights)>0:
-            guide = random.choice(self.guides)
+        WorkWithClient(self,person)
+
+class WorkWithClient:
+    def __init__(self,agency:TouristAgency,client:Person):
+        self.agency = agency
+        self.client = client
+        try: 
+            self.__interact_with_person()
+        except:
+            raise WorkWithClientFailed()
+        
+    def __interact_with_person(self):
+        travel_agent = ProcessClientChoice(self.agency.travel_agents)
+        manager = ProcessClientChoice(self.agency.managers)
+        available_tours = self.agency.get_avaiable_tours()
+        manager.offer_tours_to_client(available_tours)
+        picked_tour = ProcessClientChoice(self.__available_tours)
+        if len(picked_tour.sights)>1:
+            guide = ProcessClientChoice(self.agency.guides)
             guide.go_to_tour(picked_tour)
 
-        
+class WorkWithClientFailed(Exception):
+    def __init__(self):
+        super().__init__("work with client was failed")
 
+class EmptyStaffListOrTours(Exception):
+    def __init__(self):
+        super().__init__(f"There aren`t any objects of this type in agency")
 
-
+class ProcessClientChoice:
+    def __init__(self,lst: Optional[List]=None):
+        if lst == None:
+            raise EmptyStaffListOrTours()
+        self.lst = lst
+    def __process_client_choice(self):
+        return random.choice(self.lst)
+    
 class Route:
     def __init__(self, client: Person, tours: List[Tour]):
         self.client = client
