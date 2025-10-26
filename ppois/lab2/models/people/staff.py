@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import List, Optional
 from .person import Person as Client
-from travel.booking import Booking
-from travel.tour import Tour
-from travel.geography import City
+from models.travel.booking import Booking
+from models.travel.tour import Tour
+from models.travel.geography import City
 from random import random
 from services.bankAccount import BankAccount
 
@@ -62,7 +62,7 @@ class Manager(Employee):
     def __increase_bonus(self):
         self.salary.bonus*=1.1
 
-    def offer_tours_to_client(self, client: Client, tours: List[Tour]):
+    def offer_tours_to_client(self,  tours: List[Tour]):
         self.__increase_bonus()
         return print(*tours)
     def __str__(self):

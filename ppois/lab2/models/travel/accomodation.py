@@ -25,16 +25,17 @@ class Accomodation:
         if self.end_date == dt.date.today():
             raise AccomodationNotFoundOrExpired()  
         
-    def __getattr__(self, name):
+    def __getattribute__(self, name):
         try:
-            return object.__getattribute__(self,name)
+            return super().__getattribute__(name)
         except AttributeError:
-            print("attribute not found")
+            print(f"attribute {name} not found")
+            raise 
             
     def book(self,client_bank_account: BankAccount):
         total_price = self.price
         try:
-            Transaction(client_bank_account,self.bank_account,total_price)
+            client_bank_account.make_transaction(self.bank_account,total_price)
             return True
         except NotEnoughMoney:
             return False

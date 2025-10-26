@@ -49,11 +49,10 @@ class Visa:
 
     def __getattribute__(self, name):
         try:
-            return object.__getattribute__(self, name)
+            return super().__getattribute__(name)
         except AttributeError:
-            raise f"attribute {name} not found"
-
-        
+            print(f"attribute {name} not found")
+            raise 
 
     def use_entry(self) -> None:
         """Использовать один въезд по визе"""

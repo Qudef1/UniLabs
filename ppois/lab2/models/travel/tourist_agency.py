@@ -1,6 +1,6 @@
 from .tour import Tour
-from people.person import Person
-from people.staff import Guide, Manager, TravelAgent
+from models.people.person import Person
+from models.people.staff import Guide, Manager, TravelAgent
 from typing import List,Optional
 import random
 from services.bankAccount import BankAccount
@@ -13,13 +13,15 @@ class TouristAgency:
         self.__available_tours: List[Tour] = []
         self.managers: List[Manager] = []
         self.travel_agents: List[TravelAgent] = []
-        self.guides: List[Guide]
+        self.guides: List[Guide] = []
     def add_tour(self, tour: Tour):
-        self.available_tours.append(tour)
+        self.__available_tours.append(tour)
 
     def add_guide(self,guide:Guide):
         self.guides.append(guide)
 
+    def add_agent(self,agent:TravelAgent):
+        self.travel_agents.append(agent)
     def add_manager(self,manager: Manager):
         self.managers.append(manager)
 
@@ -44,16 +46,16 @@ class WorkWithClient:
             raise WorkWithClientFailed()
         
     def __interact_with_person(self):
-        travel_agent = ProcessClientChoice(self.agency.travel_agents)
-        manager = ProcessClientChoice(self.agency.managers)
+        travel_agent = ProcessClientChoice(self.agency.travel_agents).selected
+        manager = ProcessClientChoice(self.agency.managers).selected
         available_tours = self.agency.get_avaiable_tours()
         manager.offer_tours_to_client(available_tours)
-        picked_tour = ProcessClientChoice(self.__available_tours)
+        picked_tour = ProcessClientChoice(available_tours).selected
         try: 
             travel_agent.book_tour_for_client(self.client,picked_tour,self.agency.bank_account)
         except:
             raise WorkWithClientFailed()
-        if len(picked_tour.sights)>1:
+        if len(picked_tour.sights)>=1:
             guide = ProcessClientChoice(self.agency.guides)
             guide.go_to_tour(picked_tour)
         
@@ -71,7 +73,7 @@ class ProcessClientChoice:
         if lst == None:
             raise EmptyStaffListOrTours()
         self.lst = lst
-        self.__process_client_choice()
+        self.selected = self.__process_client_choice()
     def __process_client_choice(self):
         return random.choice(self.lst)
     

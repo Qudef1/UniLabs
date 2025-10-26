@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from .geography import City
-from people.person import Person
+from models.people.person import Person
 from services.bankAccount import BankAccount,Transaction,NotEnoughMoney
 from random import randint
 
 class Transport:
     def __init__(self,start_point:City,end_point:City,start_time:datetime,
-                 end_time: datetime,price_for_hour:float,company_bank_account:Optional[BankAccount]=None):
+                 end_time: datetime,price_for_hour:float,company_bank_account:Optional[BankAccount]=BankAccount(0,"common_bank_account")):
         self.start_point = start_point
         self.end_point = end_point
         self.start_time = start_time

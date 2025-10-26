@@ -1,9 +1,8 @@
 from datetime import datetime
 from typing import List, Optional
-from people.person import Person
+from models.people.person import Person
 from .transport import Flight, CarRental
 from .accomodation import Accomodation
-from .tour import Tour
 from services.bankAccount import Transaction,NotEnoughMoney
 
 

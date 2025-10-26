@@ -9,7 +9,7 @@ class Passport:
     def __init__(self,passport_num:str,name:str,surname:str,passport_expiration_date:date,visa: Optional[Visa] = None):
         
         self.visa = visa
-        self.passport_num = passport_num
+        self.__passport_num = passport_num
         self.passport_expiration_date = passport_expiration_date
         self.name = name
         self.surname = surname
@@ -18,10 +18,11 @@ class Passport:
     def set_visa(self,visa: Visa):
         self.visa = visa
 
-    def __getattr__(self,name):
+    def __getattribute__(self,name):
         try:
-            return object.__getattribute__(self,name)
+            return super().__getattribute__(name)
         except AttributeError:
-            print("attribute not found")
+            print("Attribute not found")
+            raise 
 
     

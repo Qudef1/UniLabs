@@ -1,8 +1,8 @@
 from datetime import date
 from typing import List
 from .geography import City
-from people.person import Person as Client
-from docs.visa import Visa
+from models.people.person import Person as Client
+from models.docs.visa import Visa
 from .accomodation import Accomodation
 from .transport import Transport
 from services.services import Service
@@ -27,7 +27,8 @@ class Tour:
         commission_rate: float = 0.05,  
         accommodations: List[Accomodation] = None,
         transports: List[Transport] = None,
-        services: List[Service] = None
+        services: List[Service] = None,
+        bookings: List[Booking] = None
     ):
         if end_date <= start_date:
             raise EndAndStartDateError()
@@ -41,6 +42,7 @@ class Tour:
         self.services = services or []
         self.commission_rate = commission_rate
         self.sights = []
+        self.bookings = bookings or []
         
 
         self.price = self.__calculate_total_price()
@@ -62,6 +64,10 @@ class Tour:
 
         return total
 
+    def add_booking(self,booking:Booking):
+        self.bookings.append(booking)
+        self.price = self.__calculate_total_price()
+        
     def add_accommodation(self, accommodation: Accomodation):
         self.accommodations.append(accommodation)
         self.price = self.__calculate_total_price() 
