@@ -221,7 +221,7 @@ class Manager(Employee):
             "Manager: Имя, Department: ..."
         @warning Атрибут self.department не определён в классе — может вызвать ошибку.
         """
-        # ⚠️ Исправление: убрано обращение к несуществующему атрибуту
+        
         return f"Manager: {self.name}"
 
 
