@@ -3,7 +3,7 @@ from typing import List, Optional
 from models.people.person import Person
 from .transport import Flight, CarRental
 from .accomodation import Accomodation
-from services.bankAccount import Transaction, NotEnoughMoney
+from services.bank_account import Transaction, NotEnoughMoney
 
 
 class Booking:

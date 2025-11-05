@@ -27,7 +27,7 @@ class VisaNoEnabledEntries(Exception):
 class VisaNotAvailable(Exception):
     """
     @brief Исключение: виза недоступна
-    @details Выбрасывается, если виза неактивна, просрочена или исчерпаны въезды.
+    @details Выбрасывается, если виза неактивна или исчерпаны въезды.
     """
     def __init__(self):
         """@brief Конструктор исключения"""

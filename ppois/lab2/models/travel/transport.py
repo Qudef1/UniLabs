@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 from .geography import City
 from models.people.person import Person
-from services.bankAccount import BankAccount, Transaction, NotEnoughMoney
+from services.bank_account import BankAccount, Transaction, NotEnoughMoney
 from random import randint
 
 

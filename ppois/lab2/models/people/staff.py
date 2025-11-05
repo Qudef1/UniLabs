@@ -5,7 +5,7 @@ from models.travel.booking import Booking
 from models.travel.tour import Tour
 from models.travel.geography import City
 from random import random
-from services.bankAccount import BankAccount
+from services.bank_account import BankAccount
 
 
 GUIDE_SUCCESS_RATE = 0.3

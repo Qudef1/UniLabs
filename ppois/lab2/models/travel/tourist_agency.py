@@ -3,7 +3,7 @@ from models.people.person import Person
 from models.people.staff import Guide, Manager, TravelAgent
 from typing import List, Optional
 import random
-from services.bankAccount import BankAccount
+from services.bank_account import BankAccount
 
 
 class EmptyStaffListOrTours(Exception):

@@ -1,7 +1,7 @@
 import datetime as dt
 from typing import Optional
 from .geography import City
-from services.bankAccount import BankAccount, Transaction, NotEnoughMoney
+from services.bank_account import BankAccount, Transaction, NotEnoughMoney
 
 
 class AccomodationNotFoundOrExpired(Exception):
@@ -120,7 +120,7 @@ class Hotel(Accomodation):
     def add_service(self, service: str):
         """
         @brief Добавляет дополнительную услугу в отель
-        @param service Название услуги (например, "Spa", "Gym")
+        @param service Название разных услуг
         """
         self.services.append(service)
 

@@ -1,5 +1,5 @@
 from models.people.person import Person
-from .bankAccount import BankAccount, Transaction, NotEnoughMoney
+from .bank_account import BankAccount, Transaction, NotEnoughMoney
 from models.travel.geography import City
 
 

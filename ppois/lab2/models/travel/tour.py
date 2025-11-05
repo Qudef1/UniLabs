@@ -7,7 +7,7 @@ from .accomodation import Accomodation
 from .transport import Transport
 from services.services import Service
 from .booking import Booking
-from services.bankAccount import Transaction, BankAccount
+from services.bank_account import Transaction, BankAccount
 
 
 class TourAndVisaIncompatible(Exception):

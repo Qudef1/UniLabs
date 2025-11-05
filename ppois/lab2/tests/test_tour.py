@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta
 from models.travel.geography import Country, City
 from models.docs.passport import Passport,PassportIsExpired
 from models.docs.visa import Visa,VisaNotAvailable,VisaNoEnabledEntries,VisaInvalidDate
-from services.bankAccount import BankAccount
+from services.bank_account import BankAccount
 from models.people.person import Person
 from models.travel.accomodation import Hotel,Hostel,Apartment,StartAndEndDateError,AccomodationNotFoundOrExpired
 from models.travel.transport import Flight,Bus,Train,CarRental

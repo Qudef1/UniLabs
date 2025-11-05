@@ -1,5 +1,5 @@
 from models.docs.passport import Passport
-from services.bankAccount import BankAccount
+from services.bank_account import BankAccount
 
 class Person:
     """
