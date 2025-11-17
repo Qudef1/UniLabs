@@ -9,7 +9,7 @@ from services.services import Service
 from .booking import Booking
 from services.bank_account import Transaction, BankAccount
 
-
+# фильтрация по start_date end_date, destination, transport
 class TourAndVisaIncompatible(Exception):
     """
     @brief Исключение: виза несовместима c туром
@@ -148,7 +148,7 @@ class Tour:
         else:
             print(f"Sight is not in the tour destination: {self.destination}")
 
-    def check_visa(self, client: Client):
+    def check_visa(self, client: Client) -> bool:
         """
         @brief Проверяет совместимость визы клиента с туром
         @param client Клиент (Person), у которого проверяется виза
@@ -169,7 +169,7 @@ class Tour:
         if not person_visa.is_valid():
             raise TourAndVisaIncompatible()
 
-        print("Your visa is compatible with this tour")
+        return True
 
     def book(self, client: Client, travel_agency_bank_account: BankAccount) -> bool:
         """
