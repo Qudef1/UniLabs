@@ -7,13 +7,15 @@ from models.docs.passport import Passport,PassportIsExpired
 from models.docs.visa import Visa,VisaNotAvailable,VisaNoEnabledEntries,VisaInvalidDate
 from services.bank_account import BankAccount
 from models.people.person import Person
-from models.travel.accomodation import Hotel,Hostel,Apartment,StartAndEndDateError,AccomodationNotFoundOrExpired
+from models.travel.accomodation import Hotel,Hostel,Apartment,StartAndEndDateError,AccomodationNotFoundOrExpired,Accomodation
 from models.travel.transport import Flight,Bus,Train,CarRental
 from services.services import Insurance,LuggageService,VisaSupportService
 from models.travel.tour import Tour, TourAndVisaIncompatible, EndAndStartDateError
 from models.travel.tourist_agency import TouristAgency, Route
 from models.people.staff import Guide,TravelAgent,Manager
 from models.travel.booking import AccomodationBooking, FlightBooking
+from models.billing import Address,ContactInfo,Order,Payment,Review, BookingPolicy, CancellationPolicy
+
 
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -312,6 +314,52 @@ class TestTour(unittest.TestCase):
         booking_temp = FlightBooking(test_person,flight=flight)
         booking_temp.confirm()
         booking_temp.cancel()
+
+    def test_billing_order_and_payment(self):
+        tour = Tour(
+            base_cost=500.0,
+            start_date=date.today() + timedelta(days=5),
+            end_date=date.today() + timedelta(days=10),
+            destination=self.city,
+        )
+        order = Order(self.client, tour)
+        invoice = order.place()
+        receiver = BankAccount(0.0, "RECV_ACC")
+        payment = Payment(invoice=invoice, payer=self.client.bank_account, receiver=receiver)
+        processed = payment.process()
+        self.assertTrue(processed)
+        self.assertTrue(invoice.paid)
+        self.assertIsNotNone(payment.paid_date)
+
+    def test_billing_address_contact_review_policy(self):
+        addr = Address("Lenina 1", "Moscow", "Russia", "101000")
+        self.assertIn("Lenina", addr.full_address())
+
+        contact = ContactInfo("a@example.com", "+70000000000")
+        self.assertIn("@example.com", contact.formatted())
+
+        
+        tour = Tour(
+            base_cost=200.0,
+            start_date=date.today() + timedelta(days=10),
+            end_date=date.today() + timedelta(days=12),
+            destination=self.city,
+        )
+        review = Review(self.client, tour, rating=5, comment="Great!")
+        review.publish()
+
+        booking = AccomodationBooking(self.client, Accomodation(
+            start_date=date.today()+timedelta(days=2),
+            end_date=date.today()+timedelta(days=4),
+            location=self.city,
+            price_per_night=10.0
+        ))
+        bp = BookingPolicy("default")
+        self.assertTrue(bp.is_allowed(booking))
+
+        cp = CancellationPolicy("std", penalty_rate=0.05)
+        penalty = cp.calculate_penalty(booking)
+        self.assertIsInstance(penalty, float)
 
         
 if __name__ == '__main__':

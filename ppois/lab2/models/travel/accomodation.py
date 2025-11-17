@@ -2,6 +2,7 @@ import datetime as dt
 from typing import Optional
 from .geography import City
 from services.bank_account import BankAccount, Transaction, NotEnoughMoney
+from random import randint
 
 
 class AccomodationNotFoundOrExpired(Exception):
@@ -160,6 +161,19 @@ class Hostel(Accomodation):
         super().__init__(start_date, end_date, location, price_per_night, bank_account)
         self.persons_for_room = persons_for_room
 
+    def property_stolen(self,client_bank_account: BankAccount, amount: float) -> bool:
+        """
+        @brief Метод для имитации кражи имущества в хостеле
+        @param client_bank_account Банковский счёт клиента
+        @param amount Сумма кражи
+        @return True, если списание прошло успешно; False при нехватке средств
+        @note Использует метод make_transaction() из BankAccount
+        """
+        try:
+            client_bank_account.make_transaction(self.bank_account, amount)
+            return True
+        except NotEnoughMoney:
+            return False
     def __str__(self) -> str:
         """
         @brief Строковое представление хостела
@@ -197,7 +211,16 @@ class Apartment(Accomodation):
         """
         super().__init__(start_date, end_date, location, price_per_night, bank_account)
         self.bedrooms = bedrooms
-
+        self.floor = None
+    
+    def get_floor(self) -> int:
+        """
+        @brief генерирует этаж апартаментов
+        @return номер этажа (случайное число от 1 до 10)
+        """
+        self.floor = randint(1, 10)
+        return self.floor
+    
     def __str__(self) -> str:
         """
         @brief Строковое представление апартаментов
@@ -206,4 +229,6 @@ class Apartment(Accomodation):
         @note В оригинальном коде используется "Hostel" вместо "Apartment".
         Это, вероятно, опечатка.
         """
-        return f"Hostel in {self.location}, price: {self.price_per_night}/night, has {self.bedrooms} bedrooms"
+        if self.floor is None:  
+            return f"Apartment in {self.location}, price: {self.price_per_night}/night, has {self.bedrooms} bedrooms"
+        return f"Apartment in {self.location}, price: {self.price_per_night}/night, has {self.bedrooms} bedrooms, floor: {self.floor}"

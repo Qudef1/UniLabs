@@ -9,7 +9,6 @@ from services.services import Service
 from .booking import Booking
 from services.bank_account import Transaction, BankAccount
 
-# фильтрация по start_date end_date, destination, transport
 class TourAndVisaIncompatible(Exception):
     """
     @brief Исключение: виза несовместима c туром

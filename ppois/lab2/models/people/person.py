@@ -1,5 +1,6 @@
 from models.docs.passport import Passport
 from services.bank_account import BankAccount
+from billing import ContactInfo
 
 class Person:
     """
@@ -18,6 +19,7 @@ class Person:
         self.bank_account = bank_account
         self.passport = passport
         self.__mood = mood
+        self.contact_info = None
 
     def __getattribute__(self, name):
         """
@@ -31,7 +33,13 @@ class Person:
         except AttributeError:
             print(f"attribute {name} not found")
             raise
-
+    
+    def set_contact_info(self, contact_info: ContactInfo):
+        """
+        @brief Устанавливает контактную информацию для человека
+        @param contact_info Объект ContactInfo с данными контакта
+        """
+        self.contact_info = contact_info
     def __check_mood(self):
         """
         @brief Проверяет текущее настроение и выводит соответствующее сообщение

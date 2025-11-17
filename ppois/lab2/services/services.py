@@ -59,7 +59,7 @@ class Insurance(Service):
         @brief Подача заявки на страховое возмещение
         @note Выводит сообщение в консоль (в реальной системе — отправка запроса в страховую)
         """
-        print(f"Claim submitted for {self.coverage} insurance")
+        return f"Claim submitted for {self.coverage} insurance"
 
 
 class VisaSupportService(Service):
@@ -82,7 +82,7 @@ class VisaSupportService(Service):
         @param country Страна назначения для визы
         @note Выводит информационное сообщение в консоль
         """
-        print(f"Visa support provided for {client.passport.name} to {country}")
+        return f"Visa support provided for {client.passport.name} to {country}"
 
 
 class LuggageService(Service):
@@ -107,4 +107,4 @@ class LuggageService(Service):
         @param to_city Город назначения
         @note Выводит информацию о доставке в консоль
         """
-        print(f"Luggage ({self.weight_kg} kg) sent from {from_city} to {to_city}")
+        return f"Luggage ({self.weight_kg} kg) sent from {from_city} to {to_city}"

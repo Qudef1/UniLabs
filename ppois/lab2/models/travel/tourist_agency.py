@@ -1,8 +1,10 @@
+from datetime import date
 from .tour import Tour
 from models.people.person import Person
 from models.people.staff import Guide, Manager, TravelAgent
 from typing import List, Optional
 import random
+from .transport import Transport
 from services.bank_account import BankAccount
 
 
@@ -15,6 +17,14 @@ class EmptyStaffListOrTours(Exception):
         """@brief Конструктор исключения"""
         super().__init__("There aren't any objects of this type in agency")
 
+class TourNotFound(Exception):
+    """
+    @brief Исключение: тур не найден
+    @details Выбрасывается, когда запрашиваемый тур отсутствует в списке доступных.
+    """
+    def __init__(self):
+        """@brief Конструктор исключения"""
+        super().__init__("The requested tour was not found")
 
 class ProcessClientChoice:
     """
@@ -206,3 +216,91 @@ class TouristAgency:
         @note Создаётся объект WorkWithClient, который выполняет полный цикл бронирования
         """
         WorkWithClient(self, person)
+
+class TourFiltration:
+    def __init__(self, tours: List[Tour] = None, client: Person = None):
+        """
+        @brief Конструктор фильтрации туров
+        @details Инициализирует список туров и клиента для фильтрации
+        @param tours Список туров для фильтрации
+        """
+        if tours is None or len(tours) == 0:
+            raise EmptyStaffListOrTours()
+        self.tours = tours
+        self.client = client
+    
+    def __filter_tours_by_budget(self, min_price = float, max_price = float) -> List[Tour]:
+        """
+        @brief Фильтрует туры по бюджету клиента
+        @return Список туров, стоимость которых не превышает бюджет клиента
+        """
+        filtered_tours = [tour for tour in self.tours if min_price <= tour.price <= max_price]
+        if len(filtered_tours) == 0:
+            raise TourNotFound()
+        return filtered_tours
+    
+    def __filter_tours_by_country(self,country: str) -> List[Tour]:
+        """
+        @brief Фильтрует туры по стране назначения
+        @return Список туров, соответствующих заданной стране
+        """
+        filtered_tours = [tour for tour in self.tours if tour.destination_country == country]
+        if len(filtered_tours) == 0:
+            raise TourNotFound()
+        return filtered_tours
+    
+    def __filter_tours_by_transport(self, except_transport: List[Transport]) -> List[Tour]:
+        """
+        @brief Фильтрует туры по виду транспорта
+        @return Список туров, не включающих указанные виды транспорта
+        """
+        filtered_tours = [tour for tour in self.tours if all(t not in except_transport for t in tour.transports)]
+        if len(filtered_tours) == 0:
+            raise TourNotFound()
+        return filtered_tours
+    
+    def __filter_tours_by_date(self,start_date: date, end_date: date) -> List[Tour]:
+        """
+        @brief Фильтрует туры по дате начала и окончания
+        @return Список туров, начинающихся и заканчивающихся в указанные даты
+        """
+        filtered_tours = [tour for tour in self.tours if tour.start_date >= start_date and tour.end_date <= end_date]
+        if len(filtered_tours) == 0:
+            raise TourNotFound()
+        return filtered_tours
+    
+    def __filter_tours_by_price(self,rise: bool = True) ->List[Tour]:
+        """
+        @brief Сортирует туры по цене
+        @return Список туров, отсортированных по цене
+        """
+        filtered_tours = sorted(self.tours, key=lambda tour: tour.price, reverse = not rise)
+        if len(filtered_tours) == 0:
+            raise TourNotFound()
+        return filtered_tours
+    
+    def filter(self,start_date: date=None,end_date: date=None,
+               min_price: float=None,max_price: float=None,
+               country: str=None,except_transport: List[Transport]=None,
+               price_rise: bool=True) -> List[Tour]:
+        """
+        @brief Выполняет фильтрацию туров по заданным критериям
+        @return Список туров, соответствующих всем заданным критериям
+        """
+        filtered_tours = self.tours
+        
+        if min_price is not None and max_price is not None:
+            filtered_tours = self.__filter_tours_by_budget(min_price, max_price)
+        
+        if country is not None:
+            filtered_tours = self.__filter_tours_by_country(country)
+        
+        if except_transport is not None:
+            filtered_tours = self.__filter_tours_by_transport(except_transport)
+        
+        if start_date is not None and end_date is not None:
+            filtered_tours = self.__filter_tours_by_date(start_date, end_date)
+        
+        filtered_tours = self.__filter_tours_by_price(price_rise)
+        
+        return filtered_tours
