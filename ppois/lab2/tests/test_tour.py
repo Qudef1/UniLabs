@@ -6,7 +6,7 @@ from models.travel.geography import Country, City
 from models.docs.passport import Passport,PassportIsExpired
 from models.docs.visa import Visa,VisaNotAvailable,VisaNoEnabledEntries,VisaInvalidDate
 from services.bank_account import BankAccount
-from models.people.person import Person
+from models.people.person import Person, ContactInfo
 from models.travel.accomodation import Hotel,Hostel,Apartment,StartAndEndDateError,AccomodationNotFoundOrExpired,Accomodation
 from models.travel.transport import Flight,Bus,Train,CarRental
 from services.services import Insurance,LuggageService,VisaSupportService
@@ -14,7 +14,7 @@ from models.travel.tour import Tour, TourAndVisaIncompatible, EndAndStartDateErr
 from models.travel.tourist_agency import TouristAgency, Route
 from models.people.staff import Guide,TravelAgent,Manager
 from models.travel.booking import AccomodationBooking, FlightBooking
-from models.billing import Address,ContactInfo,Order,Payment,Review, BookingPolicy, CancellationPolicy
+from models.people.billing import Address,Order,Payment,Review, BookingPolicy, CancellationPolicy
 
 
 

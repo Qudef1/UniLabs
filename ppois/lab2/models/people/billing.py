@@ -1,7 +1,5 @@
-from dataclasses import dataclass, field
 from datetime import datetime, date
-from typing import List, Optional, Union
-
+from typing import List, Optional
 from models.travel.booking import Booking
 from models.people.person import Person
 from models.travel.tour import Tour
@@ -10,7 +8,7 @@ from services.bank_account import BankAccount, Transaction, NotEnoughMoney
 
 class Address:
     """
-    @brief Value-object, представляющий адрес.
+    @brief Адрес.
     @details Используется в классах Person, TouristAgency, Accomodation.
     """
 
@@ -30,40 +28,17 @@ class Address:
     def full_address(self) -> str:
         """
         @brief Возвращает полный адрес в формате строки.
-        @return Строка вида "Street, City, Country PostalCode".
-        """
-        return f"{self.street}, {self.city}, {self.country} {self.postal_code}"
-
-
-class ContactInfo:
-    """
-    @brief Контактная информация пользователя.
-    @details Хранит email и телефон. Используется в классе Person.
-    """
-
-    def __init__(self, email: str = "", phone: str = ""):
-        """
-        @brief Конструктор контактной информации.
-        @param email Электронная почта.
-        @param phone Номер телефона.
-        """
-        self.email = email
-        self.phone = phone
-
-    def formatted(self) -> str:
-        """
-        @brief Форматированный вывод контактных данных.
+        @return Строка вида "Street,од контактных данных.
         @return Строка вида "email / phone".
         """
-        return f"{self.email} / {self.phone}"
-
+        return f"{self.street} / {self.city} / {self.country} / {self.postal_code}"
 
 class Invoice:
     """
     @brief Счёт за бронирование.
     @details Связан с Booking и BankAccount. Используется для оплаты заказов.
     """
-
+    
     def __init__(self, booking: Booking, issuer_account: BankAccount, amount: float):
         """
         @brief Создаёт новый счёт.
@@ -162,6 +137,9 @@ class Order:
         @brief Размещает заказ и создаёт счёт.
         @return Созданный объект Invoice.
         """
+        # Import Booking here to avoid circular import at module import time
+        from models.travel.booking import Booking
+
         invoice = Invoice(
             booking=Booking(self.person),
             issuer_account=self.person.bank_account,
@@ -185,7 +163,7 @@ class Review:
     @details Ассоциации: Review → Person, Review → Tour/Accomodation.
     """
 
-    def __init__(self, author: Person, target: Union[Tour, object], rating: int, comment: str = ""):
+    def __init__(self, author: Person, target: Optional[Tour] = None, rating: int=1, comment: str = ""):
         """
         @brief Создаёт отзыв.
         @param author Автор отзыва.
@@ -204,7 +182,7 @@ class Review:
         """
         @brief Публикует отзыв.
         """
-        print(f"Review {self.review_id} by {self.author.passport.name}: {self.rating}/5 - {self.comment}")
+        return f"Review {self.review_id} by {self.author.passport.name}: {self.rating}/5 - {self.comment}"
 
 
 class BookingPolicy:

@@ -1,6 +1,27 @@
 from models.docs.passport import Passport
 from services.bank_account import BankAccount
-from billing import ContactInfo
+
+class ContactInfo:
+    """
+    @brief Контактная информация пользователя.
+    @details Хранит email и телефон. Используется в классе Person.
+    """
+
+    def __init__(self, email: str = "", phone: str = ""):
+        """
+        @brief Конструктор контактной информации.
+        @param email Электронная почта.
+        @param phone Номер телефона.
+        """
+        self.email = email
+        self.phone = phone
+
+    def formatted(self) -> str:
+        """
+        @brief Форматированный вывод контактных данных.
+        @return Строка вида "email / phone".
+        """
+        return f"{self.email} / {self.phone}"
 
 class Person:
     """
